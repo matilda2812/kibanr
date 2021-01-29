@@ -1,0 +1,76 @@
+{
+  "aggs": {},
+  "size": 0,
+  "stored_fields": [
+    "*"
+  ],
+  "script_fields": {},
+  "docvalue_fields": [
+    {
+      "field": "@timestamp",
+      "format": "date_time"
+    },
+    {
+      "field": "httpd.error.object.request.url_params.createdBefore",
+      "format": "date_time"
+    },
+    {
+      "field": "httpd.error.object.request.url_params.periodEnd",
+      "format": "date_time"
+    },
+    {
+      "field": "read_timestamp",
+      "format": "date_time"
+    }
+  ],
+  "_source": {
+    "excludes": [
+      "httpd.access.url_params.*"
+    ]
+  },
+  "query": {
+    "bool": {
+      "must": [],
+      "filter": [
+        {
+          "match_all": {}
+        },
+        {
+          "match_phrase": {
+            "tags.keyword": "production"
+          }
+        },
+        {
+          "match_phrase": {
+            "httpd.type.keyword": "access"
+          }
+        },
+        {
+          "match_phrase": {
+            "input.type.keyword": "log"
+          }
+        }
+      ],
+      "should": [],
+      "must_not": [
+        {
+          "bool": {
+            "should": [
+              {
+                "match_phrase": {
+                  "httpd.access.agent.keyword": "ALA Zabbix Biocache Web Monitoring"
+                }
+              },
+              {
+                "match_phrase": {
+                  "httpd.access.agent.keyword": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/98 Safari/537.4 (StatusCake)"
+                }
+              }
+            ],
+            "minimum_should_match": 1
+          }
+        }
+      ]
+    }
+  }
+}
