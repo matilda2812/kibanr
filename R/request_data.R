@@ -3,6 +3,7 @@
 #' @param user string: username to authenticate request
 #' @param pwd string: password to authenticate request
 #' @param body string: list containing request
+#' @export request_data
 
 request_data <- function(body) {
   # for now write body to file until we work out how to send it without this 
