@@ -91,6 +91,7 @@ add_date_filter <- function(body, start, end) {
   body
 }
 
+#' @export email_exists_filter
 email_exists_filter <- function(body) {
   num_filters <- length(body$query$bool$filter)
   body$query$bool$filter[[num_filters + 1]] <-
