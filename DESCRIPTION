@@ -1,0 +1,11 @@
+Package: kibanr
+Title: Extracting logstash data from Kibana
+Version: 0.1
+Authors@R: person("Matilda", "Stevenson", email = "matilda.stevenson@csiro.au",
+                  role = c("aut", "cre"))
+Description: The package build queries in Kibana query language, retrieves log data, and parses the results.
+Depends: R (>= 3.1.0)
+License: GPL (>=3)
+LazyData: true
+RoxygenNote: 7.1.1
+Encoding: UTF-8

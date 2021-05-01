@@ -15,7 +15,11 @@ add_filter <- function(body, filter) {
   body
 }
 
+
 add_single_filter <- function(filter) {
+  if (grepl("*", filter)) {
+    return(list(wildcard = filter))
+  }
   list(match_phrase = filter)
 }
 
@@ -63,7 +67,7 @@ add_travis_filter <- function(body) {
 }
 
 
-#' @export date_filter
+#' @export add_date_filter
 add_date_filter <- function(body, start, end) {
   
   if (!is.Date(start)) {
