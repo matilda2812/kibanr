@@ -70,10 +70,10 @@ add_travis_filter <- function(body) {
 #' @export add_date_filter
 add_date_filter <- function(body, start, end) {
   
-  if (!is.Date(start)) {
+  if (!class(start) == "Date") {
     stop("start argument must be of class 'Date'")
   }
-  if (!is.Date(end)) {
+  if (!class(end) == "Date") {
     stop("end argument must be of class 'Date'")
   }
   # put date into correct format
