@@ -17,7 +17,7 @@ add_filter <- function(body, filter) {
 
 
 add_single_filter <- function(filter) {
-  if (grepl("*", filter)) {
+  if (grepl("\\*", filter)) {
     return(list(wildcard = filter))
   }
   list(match_phrase = filter)
@@ -26,8 +26,14 @@ add_single_filter <- function(filter) {
 add_multi_filter <- function(filter) {
   name <- names(filter)
   filters <- lapply(filter[[name]], function(x) {
-    mp <- list(match_phrase = list())
-    mp$match_phrase[[name]] <- x
+    print(x)
+    if (grepl("\\*", x)) {
+      mp <- list(wildcard = list())
+      mp$wildcard[[name]] <- x
+    } else {
+      mp <- list(match_phrase = list())
+      mp$match_phrase[[name]] <- x
+    }
     mp
   })
   list(bool = list(should = filters,
